@@ -6,7 +6,8 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { AuthProvider } from './components/AuthProvider';
 import PrivateRoute from './components/PrivateRoute';
-import PublicRoute from './components/PublicRoute'; // Import the PublicRoute component
+import PublicRoute from './components/PublicRoute';
+import AppFrame from './components/AppFrame'; // Import the AppFrame component
 
 function App() {
   return (
@@ -21,8 +22,10 @@ function App() {
 
           {/* Private routes */}
           <Route element={<PrivateRoute />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route element={<AppFrame />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+            </Route>
           </Route>
         </Routes>
       </AuthProvider>

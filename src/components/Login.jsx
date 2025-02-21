@@ -59,7 +59,7 @@ export default function Login() {
 
     try {
       const result = await loginRequest(username, password);
-      login(username, result.userId, result.accessToken);
+      login(result.userId, result.accessToken);
     } catch (error) {
       setUsernameError(true);
       setPasswordError(true);

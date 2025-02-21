@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import UserInfo from './UserInfo'; // Import the UserInfo component
-import { Container, AppBar, Toolbar, Typography } from '@mui/material';
+import { Container } from '@mui/material';
+import UserInfo from './UserInfo'; 
+import { userSelfDetails } from '../utils/userRequests';
 
-const AppFrame = ({ loggedInUser }) => {
+const AppFrame = () => {
+  const [userDetails, setUserDetails] = useState(null);
+  const loggedInUser = localStorage.getItem('loggedInUser');
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await userSelfDetails(loggedInUser);
+        setUserDetails(response);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    }
+
+    if (loggedInUser) {
+      fetchUserDetails();
+    }
+  }, [loggedInUser]);
+
   return (
     <Container>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">My App</Typography>
-        </Toolbar>
-      </AppBar>
-      <Outlet /> {/* This will render the nested routes */}
-      {loggedInUser && <UserInfo username={loggedInUser} />} {/* Render the UserInfo component */}
+      <Outlet /> 
+      {loggedInUser && <UserInfo data={userDetails} />}
     </Container>
   );
 };

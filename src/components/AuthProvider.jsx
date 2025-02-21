@@ -12,27 +12,24 @@ export const useAuth = () => {
 
 
 export const AuthProvider = ({ children }) => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const [userId, setUserId] = useState(localStorage.getItem('userId'));
+  const [loggedInUser, setLoggedInUser] = useState(localStorage.getItem('loggedInUser'));
   const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
   const navigate = useNavigate();
 
-  const login = (username, userId, accessToken) => {
-    setLoggedInUser(username);
-    setUserId(userId);
+  const login = (userId, accessToken) => {
+    setLoggedInUser(userId);
     setAccessToken(accessToken);
 
     localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('userId', userId);
+    localStorage.setItem('loggedInUser', userId);
   };
 
   const logout = () => {
     setLoggedInUser(null);
-    setUserId(null);
     setAccessToken(null);
 
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('userId');
+    localStorage.removeItem('loggedInUser');
 
     axios.interceptors.response.eject(responseInterceptor);
 
@@ -66,7 +63,10 @@ export const AuthProvider = ({ children }) => {
       },
       (error) => {
         // Handle errors
-        if (error.response && (error.response.data.error === 'Invalid refresh token' || error.response.data.error === 'Refresh token not provided')) {
+        if (error.response && (
+          error.response.data.error === 'Invalid refresh token' || 
+          error.response.data.error === 'Refresh token not provided'
+        )) {
           logout();
         }
         return Promise.reject(error);
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
   }, [logout]);
 
   return (
-    <AuthContext.Provider value={{ loggedInUser, userId, accessToken, login, logout }}>
+    <AuthContext.Provider value={{ loggedInUser, accessToken, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
