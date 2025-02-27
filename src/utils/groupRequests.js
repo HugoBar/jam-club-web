@@ -23,6 +23,16 @@ export const getUserGroups = async () => {
   }
 };
 
+export const getGroupById = async (groupId) => {
+  try {
+    const response = await axios.get(`${url}/group/${groupId}`);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
     const response = await axios.post(`${url}/group/${groupId}/invite/${inviteId}/accept`);

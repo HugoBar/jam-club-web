@@ -5,12 +5,14 @@ import GroupForm from './GroupForm';
 import { getUserGroups } from '../../utils/groupRequests';
 import GroupCard from './GroupCard';
 import InviteList from './InviteList';
+import { useNavigate } from "react-router-dom";
 
 function GroupList() {
   const [open, setOpen] = useState(false);
   const [userGroups, setUserGroups] = useState([]);
   const [hasInvites, setHasInvites] = useState(true); 
   const loggedInUser = localStorage.getItem('loggedInUser');
+  const navigate = useNavigate();
 
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -23,6 +25,11 @@ function GroupList() {
       console.error('Error fetching user details:', error);
     }
   };
+
+  const handleGroupClick = (group) => {
+    console.log('Group clicked:', group._id);
+    navigate(`/${group.name}`, { state: { groupId: group._id } });
+  }
 
   useEffect(() => {
     if (loggedInUser) {
@@ -58,7 +65,9 @@ function GroupList() {
           }}
         >
           {userGroups.map((group) => (
-            <GroupCard key={group._id} group={group} />
+            <a  onClick={() => handleGroupClick(group)}>
+              <GroupCard key={group._id} group={group} />
+            </a>
           ))}
 
           <Card sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 120 }}>
