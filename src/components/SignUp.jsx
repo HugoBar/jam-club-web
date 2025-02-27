@@ -74,7 +74,6 @@ export default function SignUp(props) {
 
     try {
       const result = await registerRequest( username, nickname, password );
-      console.log('Signup successful:', result);
       navigate('/login', { state: { registrationSuccess: true } }); // Redirect or show success message
     } catch (error) {
       if (error.message.includes('Nickname')) {
