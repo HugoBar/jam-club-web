@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Card, Typography, Table, TableBody } from '@mui/material';
 import InviteCard from './InviteCard';
-import { userInvitesReceived } from '../utils/userRequests';
-import { acceptGroupInvite, rejectGroupInvite } from '../utils/groupRequests';
+import { userInvitesReceived } from '../../utils/userRequests';
+import { acceptGroupInvite, rejectGroupInvite } from '../../utils/groupRequests';
 
 function InviteList({ onHasInvites, onInviteReply }) {
   const [invites, setInvites] = useState([]);

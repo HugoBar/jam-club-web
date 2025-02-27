@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Card, CardContent, Typography, IconButton, Table, TableBody, TableRow, TableCell, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import GroupForm from './GroupForm';
-import { getUserGroups } from '../utils/groupRequests';
+import { getUserGroups } from '../../utils/groupRequests';
 import GroupCard from './GroupCard';
 import InviteList from './InviteList';
 

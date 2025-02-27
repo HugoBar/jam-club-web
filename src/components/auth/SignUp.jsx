@@ -9,11 +9,11 @@ import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Card } from './shared/FormCard';
-import { AuthContainer } from './shared/AuthContainer';
-import AppTheme from '../theme/AppTheme';
-import ColorModeSelect from '../theme/ColorModeSelect';
-import { registerRequest } from '../utils/authRequests'; 
+import { Card } from '../shared/FormCard';
+import { AuthContainer } from '../shared/AuthContainer';
+import AppTheme from '../../theme/AppTheme';
+import ColorModeSelect from '../../theme/ColorModeSelect';
+import { registerRequest } from '../../utils/authRequests'; 
 
 export default function SignUp(props) {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { createGroup } from '../utils/groupRequests';
+import { createGroup } from '../../utils/groupRequests';
 
 export default function FormDialog({ open, close, onGroupCreated }) {
   const [groupName, setGroupName] = useState('');

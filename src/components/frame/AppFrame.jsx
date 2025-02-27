@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container } from '@mui/material';
 import UserInfo from './UserInfo'; 
-import { userSelfDetails } from '../utils/userRequests';
+import { userSelfDetails } from '../../utils/userRequests';
 
 const AppFrame = () => {
   const [userDetails, setUserDetails] = useState(null);

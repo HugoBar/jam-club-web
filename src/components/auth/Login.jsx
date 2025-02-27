@@ -7,10 +7,10 @@ import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Card } from './shared/FormCard';
-import { AuthContainer } from './shared/AuthContainer';
-import AppTheme from '../theme/AppTheme';
-import { loginRequest } from '../utils/authRequests';
+import { Card } from '../shared/FormCard';
+import { AuthContainer } from '../shared/AuthContainer';
+import AppTheme from '../../theme/AppTheme';
+import { loginRequest } from '../../utils/authRequests';
 import { useAuth } from './AuthProvider';
 
 export default function Login() {

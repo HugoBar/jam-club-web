@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import DailyTrack from './DailyTrack';
-import GroupList from './GroupList';
+import DailyTrack from './tracks/DailyTrack';
+import GroupList from './groups/GroupList';
 
 function Home() {
   return (
