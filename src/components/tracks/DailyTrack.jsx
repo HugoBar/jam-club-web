@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import { trackDetails } from '../../utils/trackRequests';
-import placeholder from '../assets/track-placeholder.png';
+import placeholder from '../../assets/track-placeholder.png';
 
 function DailyTrack() {
   const [track, setTrack] = useState(null); 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
-import About from './components/About';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
-import { AuthProvider } from './components/AuthProvider';
-import PrivateRoute from './components/PrivateRoute';
-import PublicRoute from './components/PublicRoute';
-import AppFrame from './components/AppFrame'; // Import the AppFrame component
+import MusicRoom from './components/MusicRoom';
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+import { AuthProvider } from './components/auth/AuthProvider';
+import PrivateRoute from './components/routes/PrivateRoute';
+import PublicRoute from './components/routes/PublicRoute';
+import AppFrame from './components/frame/AppFrame'; // Import the AppFrame component
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route element={<AppFrame />}>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/:groupName" element={<MusicRoom />} />
             </Route>
           </Route>
         </Routes>
