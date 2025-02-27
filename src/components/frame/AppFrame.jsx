@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Container } from '@mui/material';
 import UserInfo from './UserInfo'; 
 import { userSelfDetails } from '../../utils/userRequests';
+import LogoBar from './LogoBar'
 
 const AppFrame = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -25,7 +26,8 @@ const AppFrame = () => {
 
   return (
     <Container>
-      <Outlet /> 
+      <Outlet />
+      <LogoBar />
       {loggedInUser && <UserInfo data={userDetails} />}
     </Container>
   );
