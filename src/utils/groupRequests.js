@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 const url = process.env.API_URL;
 
 export const createGroup = async (name) => {
@@ -35,38 +35,42 @@ export const getGroupById = async (groupId) => {
 
 export const inviteToGroup = async (groupId, username) => {
   try {
-    console.log(username)
     const response = await axios.post(`${url}/group/${groupId}/invite`, {
-      username
+      username,
     });
-    
+
     return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
 
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
-    const response = await axios.post(`${url}/group/${groupId}/invite/${inviteId}/accept`);
-    
+    const response = await axios.post(
+      `${url}/group/${groupId}/invite/${inviteId}/accept`
+    );
+
     return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
 
 export const rejectGroupInvite = async (groupId, inviteId, status) => {
   try {
-    const response = await axios.post(`${url}/group/${groupId}/invite/${inviteId}/reject`, {
-      status
-    });
+    const response = await axios.post(
+      `${url}/group/${groupId}/invite/${inviteId}/reject`,
+      {
+        status,
+      }
+    );
 
     return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
@@ -74,12 +78,12 @@ export const rejectGroupInvite = async (groupId, inviteId, status) => {
 export const removeFromGroup = async (groupId, userId) => {
   try {
     const response = await axios.post(`${url}/group/${groupId}/remove`, {
-      userId
+      userId,
     });
 
     return response.data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 };

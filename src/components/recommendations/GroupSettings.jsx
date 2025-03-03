@@ -32,11 +32,6 @@ const GroupSettings = ({ group }) => {
   const open = Boolean(anchorEl);
   const id = open ? "popover-menu" : undefined;
 
-  const options = [
-    { label: "Edit Group", onClick: () => console.log("Editing Group") },
-    { label: "Leave Group", onClick: () => setOpenDialog(true) },
-  ];
-
   const handleLeaveGroup = async () => {
     try {
       await removeFromGroup(group._id, loggedInUser);

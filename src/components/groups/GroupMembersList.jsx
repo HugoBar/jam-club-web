@@ -15,12 +15,12 @@ import {
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { inviteToGroup, removeFromGroup } from "../../utils/groupRequests";
-import RemoveIcon from '@mui/icons-material/Remove';
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const GroupMembersList = ({ group, onNewMemberList }) => {
   const [openDialog, setOpenDialog] = useState(false);
-  const [openConfirmDialog, setOpenConfirmDialog] = useState(false); // State for confirmation dialog
-  const [selectedMember, setSelectedMember] = useState(null); // State to store the member being removed
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
   const loggedInUser = localStorage.getItem("loggedInUser");
   const [username, setUsername] = useState("");
 
@@ -42,23 +42,23 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
   };
 
   const handleRemoveFromGroup = (member) => {
-    setSelectedMember(member); 
-    setOpenConfirmDialog(true); 
+    setSelectedMember(member);
+    setOpenConfirmDialog(true);
   };
 
   const confirmRemove = async () => {
     try {
       await removeFromGroup(group._id, selectedMember._id);
 
-      setOpenConfirmDialog(false); 
-      onNewMemberList()
+      setOpenConfirmDialog(false);
+      onNewMemberList();
     } catch (error) {
       console.error("Error removing user from group:", error);
     }
   };
 
   const cancelRemove = () => {
-    setOpenConfirmDialog(false); // Close the confirmation dialog without removing
+    setOpenConfirmDialog(false);
   };
 
   return (
@@ -95,7 +95,10 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
                   </Typography>
                 )}
                 {member._id !== loggedInUser && member._id !== group.owner && (
-                  <Button onClick={() => handleRemoveFromGroup(member)} color="error">
+                  <Button
+                    onClick={() => handleRemoveFromGroup(member)}
+                    color="error"
+                  >
                     <RemoveIcon />
                   </Button>
                 )}
@@ -127,11 +130,13 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
         </DialogActions>
       </Dialog>
 
-      {/* Confirmation Dialog */}
       <Dialog open={openConfirmDialog} onClose={cancelRemove}>
         <DialogTitle>Confirmar remoção</DialogTitle>
         <DialogContent>
-          <Typography>Tem a certeza que deseja remover {selectedMember?.nickname} do grupo?</Typography>
+          <Typography>
+            Tem a certeza que deseja remover {selectedMember?.nickname} do
+            grupo?
+          </Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={cancelRemove} color="primary">

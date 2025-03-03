@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Card, Typography, Table, TableBody } from '@mui/material';
-import InviteCard from './InviteCard';
-import { userInvitesReceived } from '../../utils/userRequests';
-import { acceptGroupInvite, rejectGroupInvite } from '../../utils/groupRequests';
+import React, { useState, useEffect } from "react";
+import { Box, Card, Typography, Table, TableBody } from "@mui/material";
+import InviteCard from "./InviteCard";
+import { userInvitesReceived } from "../../utils/userRequests";
+import {
+  acceptGroupInvite,
+  rejectGroupInvite,
+} from "../../utils/groupRequests";
 
 function InviteList({ onHasInvites, onInviteReply }) {
   const [invites, setInvites] = useState([]);
-  const loggedInUser = localStorage.getItem('loggedInUser');
+  const loggedInUser = localStorage.getItem("loggedInUser");
 
   const fetchInvites = async () => {
-    const receivedInvites = await userInvitesReceived(loggedInUser, { status: "pending" }); 
+    const receivedInvites = await userInvitesReceived(loggedInUser, {
+      status: "pending",
+    });
     setInvites(receivedInvites);
-    onHasInvites(receivedInvites.length > 0); 
+    onHasInvites(receivedInvites.length > 0);
   };
 
   useEffect(() => {
@@ -30,28 +35,33 @@ function InviteList({ onHasInvites, onInviteReply }) {
     onInviteReply();
   };
 
-  if (invites.length === 0) return null; 
+  if (invites.length === 0) return null;
 
   return (
     <Box
       sx={{
-        minWidth: '220px',
-        display: 'flex',
-        flexDirection: 'column',
+        minWidth: "220px",
+        display: "flex",
+        flexDirection: "column",
         gap: 1,
-        '@media (max-width: 768px)': {
-          width: '100%', 
+        "@media (max-width: 768px)": {
+          width: "100%",
         },
       }}
     >
       <Card sx={{ padding: 2 }}>
-        <Typography variant="h6" sx={{ textAlign: 'center', marginBottom: 2 }}>
+        <Typography variant="h6" sx={{ textAlign: "center", marginBottom: 2 }}>
           Convites pendentes
         </Typography>
         <Table size="small">
           <TableBody>
             {invites.map((invite) => (
-              <InviteCard key={invite._id} invite={invite} onAccept={handleAccept} onDecline={handleDecline} />
+              <InviteCard
+                key={invite._id}
+                invite={invite}
+                onAccept={handleAccept}
+                onDecline={handleDecline}
+              />
             ))}
           </TableBody>
         </Table>
