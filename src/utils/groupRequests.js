@@ -33,6 +33,20 @@ export const getGroupById = async (groupId) => {
   }
 };
 
+export const inviteToGroup = async (groupId, username) => {
+  try {
+    console.log(username)
+    const response = await axios.post(`${url}/group/${groupId}/invite`, {
+      username
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.log(error)
+    throw new Error(error.response.data.message);
+  }
+};
+
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
     const response = await axios.post(`${url}/group/${groupId}/invite/${inviteId}/accept`);
@@ -45,10 +59,22 @@ export const acceptGroupInvite = async (groupId, inviteId) => {
 };
 
 export const rejectGroupInvite = async (groupId, inviteId, status) => {
-  console.log(url)
   try {
     const response = await axios.post(`${url}/group/${groupId}/invite/${inviteId}/reject`, {
       status
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error)
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const removeFromGroup = async (groupId, userId) => {
+  try {
+    const response = await axios.post(`${url}/group/${groupId}/remove`, {
+      userId
     });
 
     return response.data;
