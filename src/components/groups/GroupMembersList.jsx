@@ -11,67 +11,21 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { inviteToGroup, removeFromGroup } from "../../utils/groupRequests";
 import RemoveIcon from "@mui/icons-material/Remove";
+import GroupInviteDialog from "./GroupInviteDialog";
+import GroupKickDialog from "./GroupKickDialog";
 
 const GroupMembersList = ({ group, onNewMemberList }) => {
-  const [openDialog, setOpenDialog] = useState(false);
-  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+  const [openInviteDialog, setOpenInviteDialog] = useState(false);
+  const [openKickDialog, setOpenKickDialog] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
   const loggedInUser = localStorage.getItem("loggedInUser");
-  const [username, setUsername] = useState("");
-  const [error, setError] = useState('');
-
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
-  const handleInvite = async () => {
-    try {
-      await inviteToGroup(group._id, username);
-      setError("");
-      handleCloseDialog();
-    } catch (error) {
-      console.error("Error inviting user:", error);
-      switch (error.message) {
-        case "User is already a member of the group":
-          setError("Utilizador já é membro do grupo.");
-          break;
-        case "User already has an invite":
-          setError("Utilizador já tem um convite pendente.");
-          break;
-        default:
-          setError("Não foi possível convidar o utilizador.");
-          break;
-      }
-    }
-  };
 
   const handleRemoveFromGroup = (member) => {
     setSelectedMember(member);
-    setOpenConfirmDialog(true);
-  };
-
-  const confirmRemove = async () => {
-    try {
-      await removeFromGroup(group._id, selectedMember._id);
-
-      setOpenConfirmDialog(false);
-      onNewMemberList();
-    } catch (error) {
-      console.error("Error removing user from group:", error);
-    }
-  };
-
-  const cancelRemove = () => {
-    setOpenConfirmDialog(false);
+    setOpenKickDialog(true);
   };
 
   return (
@@ -85,10 +39,15 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>
           Membros
         </Typography>
-        <Button variant="contained" size="small" onClick={handleOpenDialog}>
+        <Button
+          variant="contained"
+          size="small"
+          onClick={() => setOpenInviteDialog(true)}
+        >
           <PersonAddIcon />
         </Button>
       </Box>
+
       <Table>
         <TableBody>
           {group.members.map((member) => (
@@ -121,47 +80,19 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
         </TableBody>
       </Table>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Convida um novo membro</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Username"
-            fullWidth
-            variant="outlined"
-            onChange={(e) => setUsername(e.target.value)}
-            error={!!error} 
-            helperText={error}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={handleInvite} color="primary">
-            Enviar
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <GroupInviteDialog
+        open={openInviteDialog}
+        onClose={() => setOpenInviteDialog(false)}
+        groupId={group._id}
+      />
 
-      <Dialog open={openConfirmDialog} onClose={cancelRemove}>
-        <DialogTitle>Confirmar remoção</DialogTitle>
-        <DialogContent>
-          <Typography>
-            Tem a certeza que deseja remover {selectedMember?.nickname} do
-            grupo?
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={cancelRemove} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={confirmRemove} color="error">
-            Remover
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <GroupKickDialog
+        open={openKickDialog}
+        onClose={() => setOpenKickDialog(false)}
+        groupId={group._id}
+        member={selectedMember}
+        onNewMemberList={onNewMemberList}
+      />
     </Box>
   );
 };
