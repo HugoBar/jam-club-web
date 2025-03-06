@@ -84,7 +84,7 @@ function UserInfo({ data }) {
             color="secondary"
             sx={{ marginTop: "0.5rem", fontFamily: "Roboto, sans-serif" }}
           >
-            Change Password
+            Alterar Palavra-passe (WIP)
           </Button>
           <Button
             variant="contained"
@@ -92,7 +92,7 @@ function UserInfo({ data }) {
             onClick={handleLogoutClick}
             sx={{ marginTop: "0.5rem", fontFamily: "Roboto, sans-serif" }}
           >
-            Logout
+            Sair
           </Button>
         </Box>
       </Collapse>

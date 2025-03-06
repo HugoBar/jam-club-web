@@ -12,6 +12,9 @@ import { AuthContainer } from "../shared/AuthContainer";
 import AppTheme from "../../theme/AppTheme";
 import { loginRequest } from "../../utils/authRequests";
 import { useAuth } from "./AuthProvider";
+import Link from "@mui/material/Link";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,6 +23,7 @@ function Login() {
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false); // State for alert visibility
 
   const validateInputs = () => {
     const username = document.getElementById("username");
@@ -119,7 +123,6 @@ function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
@@ -135,7 +138,32 @@ function Login() {
               Login
             </Button>
           </Box>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <Typography sx={{ textAlign: "center" }}>
+              Ainda não tens conta?{" "}
+              <Link href="/signup" variant="body2" sx={{ alignSelf: "center" }}>
+                Registo
+              </Link>
+            </Typography>
+            <Typography sx={{ textAlign: "center" }}>
+              Não te lembras da tua palavra-passe?{" "}
+              <Link
+                component="button"
+                variant="body2"
+                sx={{ alignSelf: "center" }}
+                onClick={() => setShowAlert(true)}
+              >
+                Pena, ainda não temos essa funcionalidade.
+              </Link>
+            </Typography>
+          </Box>
         </Card>
+        {showAlert && (
+          <Alert severity="warning" onClose={() => setShowAlert(false)}>
+            <AlertTitle>ALERTA BURRO</AlertTitle>
+            Não sabes ler? Eu disse que não funciona.
+          </Alert>
+        )}
       </AuthContainer>
     </AppTheme>
   );
