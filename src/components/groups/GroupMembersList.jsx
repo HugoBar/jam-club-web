@@ -23,6 +23,7 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const loggedInUser = localStorage.getItem("loggedInUser");
   const [username, setUsername] = useState("");
+  const [error, setError] = useState('');
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -35,10 +36,22 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
   const handleInvite = async () => {
     try {
       await inviteToGroup(group._id, username);
+      setError("");
+      handleCloseDialog();
     } catch (error) {
       console.error("Error inviting user:", error);
+      switch (error.message) {
+        case "User is already a member of the group":
+          setError("Utilizador já é membro do grupo.");
+          break;
+        case "User already has an invite":
+          setError("Utilizador já tem um convite pendente.");
+          break;
+        default:
+          setError("Não foi possível convidar o utilizador.");
+          break;
+      }
     }
-    handleCloseDialog();
   };
 
   const handleRemoveFromGroup = (member) => {
@@ -118,6 +131,8 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
             fullWidth
             variant="outlined"
             onChange={(e) => setUsername(e.target.value)}
+            error={!!error} 
+            helperText={error}
           />
         </DialogContent>
         <DialogActions>
