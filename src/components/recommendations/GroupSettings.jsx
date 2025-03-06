@@ -15,7 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { removeFromGroup } from "../../utils/groupRequests";
 import { useNavigate } from "react-router-dom";
 
-const GroupSettings = ({ group }) => {
+function GroupSettings({ group }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const loggedInUser = localStorage.getItem("loggedInUser");
@@ -87,6 +87,6 @@ const GroupSettings = ({ group }) => {
       </Dialog>
     </>
   );
-};
+}
 
 export default GroupSettings;

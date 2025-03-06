@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { createUserRecommendation } from "../../utils/recommendationRequests";
 
-export default function RecommendationForm({ groupId, onNewRecommendation }) {
+function RecommendationForm({ groupId, onNewRecommendation }) {
   // TODO REMOVE LATER
   const spotifyId = "6fvZwoOMEMy2LBbLtdznHE";
 
@@ -26,3 +26,5 @@ export default function RecommendationForm({ groupId, onNewRecommendation }) {
     </Stack>
   );
 }
+
+export default RecommendationForm;

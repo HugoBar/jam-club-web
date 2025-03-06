@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { inviteToGroup } from "../../utils/groupRequests";
 
-const GroupInviteDialog = ({ open, onClose, groupId }) => {
+function GroupInviteDialog({ open, onClose, groupId }) {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
@@ -65,6 +65,6 @@ const GroupInviteDialog = ({ open, onClose, groupId }) => {
       </DialogActions>
     </Dialog>
   );
-};
+}
 
 export default GroupInviteDialog;

@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/effect-cards"; // Import effect-cards CSS
 import { Navigation, EffectCards } from "swiper/modules";
 
-const SimpleSlider = ({ items }) => {
+function SimpleSlider({ items }) {
   return (
     <Box
       sx={{
@@ -23,7 +23,6 @@ const SimpleSlider = ({ items }) => {
         effect="cards"
         slideShadows={false}
       >
-        {console.log(items)}
         {items ? (
           items.map((item, index) => (
             <SwiperSlide key={index}>
@@ -68,6 +67,6 @@ const SimpleSlider = ({ items }) => {
       </Swiper>
     </Box>
   );
-};
+}
 
 export default SimpleSlider;

@@ -17,7 +17,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import GroupInviteDialog from "./GroupInviteDialog";
 import GroupKickDialog from "./GroupKickDialog";
 
-const GroupMembersList = ({ group, onNewMemberList }) => {
+function GroupMembersList({ group, onNewMemberList }) {
   const [openInviteDialog, setOpenInviteDialog] = useState(false);
   const [openKickDialog, setOpenKickDialog] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
@@ -95,6 +95,6 @@ const GroupMembersList = ({ group, onNewMemberList }) => {
       />
     </Box>
   );
-};
+}
 
 export default GroupMembersList;

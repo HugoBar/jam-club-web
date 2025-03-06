@@ -9,7 +9,7 @@ import { getGroupRecommendations } from "../utils/recommendationRequests";
 import GroupSettings from "./recommendations/GroupSettings";
 import GroupListTable from "./groups/GroupMembersList";
 
-const MusicRoom = () => {
+function MusicRoom() {
   const [group, setGroup] = useState(null);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -38,11 +38,13 @@ const MusicRoom = () => {
   };
 
   useEffect(() => {
+    if (!groupId) return;
+    console.log("groupId", groupId);
     fetchGroup();
     fetchGroupRecommendations();
   }, [groupId]);
 
-  if (loading) {
+  if (loading || !group) {
     return <div>Loading...</div>;
   }
 
@@ -114,6 +116,6 @@ const MusicRoom = () => {
       </Box>
     </>
   );
-};
+}
 
 export default MusicRoom;

@@ -13,7 +13,7 @@ import { getGroupRecommendationByUser } from "../../utils/recommendationRequests
 import placeholder from "../../assets/track-placeholder.png";
 import RecommendationForm from "./RecommendationForm";
 
-export default function UserRecommendation({ groupId, onNewRecommendation }) {
+function UserRecommendation({ groupId, onNewRecommendation }) {
   const theme = useTheme();
   const [recommendation, setRecommendation] = useState(null);
   const [hasRecommendation, setHasRecommendation] = useState(false);
@@ -132,3 +132,5 @@ export default function UserRecommendation({ groupId, onNewRecommendation }) {
     </Card>
   );
 }
+
+export default UserRecommendation;

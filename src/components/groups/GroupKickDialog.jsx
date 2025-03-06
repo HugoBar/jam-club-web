@@ -5,11 +5,11 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  Typography
+  Typography,
 } from "@mui/material";
 import { removeFromGroup } from "../../utils/groupRequests";
 
-const GroupKickDialog = ({ open, onClose, groupId, member, onNewMemberList }) => {
+function GroupKickDialog({ open, onClose, groupId, member, onNewMemberList }) {
   const handleRemoval = async () => {
     try {
       await removeFromGroup(groupId, member._id);
@@ -22,26 +22,26 @@ const GroupKickDialog = ({ open, onClose, groupId, member, onNewMemberList }) =>
 
   const handleClose = () => {
     onClose();
-  }
+  };
 
   return (
     <Dialog open={open} onClose={onClose}>
-        <DialogTitle>Confirmar remoção</DialogTitle>
-        <DialogContent>
-          <Typography>
-            Tem a certeza que deseja remover {member?.nickname} do grupo?
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={handleRemoval} color="error">
-            Remover
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DialogTitle>Confirmar remoção</DialogTitle>
+      <DialogContent>
+        <Typography>
+          Tem a certeza que deseja remover {member?.nickname} do grupo?
+        </Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={handleRemoval} color="error">
+          Remover
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
-};
+}
 
 export default GroupKickDialog;
