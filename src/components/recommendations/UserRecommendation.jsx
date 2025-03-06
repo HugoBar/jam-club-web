@@ -39,7 +39,7 @@ function UserRecommendation({ groupId, onNewRecommendation }) {
   }, [hasRecommendation]);
 
   return (
-    <Card sx={{ display: "flex" }}>
+    <Card sx={{ display: "flex", height: 160 }}>
       {recommendation ? (
         <>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -57,21 +57,13 @@ function UserRecommendation({ groupId, onNewRecommendation }) {
             </CardContent>
             <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
               <IconButton aria-label="previous">
-                {theme.direction === "rtl" ? (
-                  <SkipNextIcon />
-                ) : (
-                  <SkipPreviousIcon />
-                )}
+                <SkipPreviousIcon />
               </IconButton>
               <IconButton aria-label="play/pause">
                 <PlayArrowIcon sx={{ height: 38, width: 38 }} />
               </IconButton>
               <IconButton aria-label="next">
-                {theme.direction === "rtl" ? (
-                  <SkipPreviousIcon />
-                ) : (
-                  <SkipNextIcon />
-                )}
+                <SkipNextIcon />
               </IconButton>
             </Box>
           </Box>
@@ -89,44 +81,10 @@ function UserRecommendation({ groupId, onNewRecommendation }) {
             onNewRecommendation={handleNewRecommendation}
           ></RecommendationForm>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography component="div" variant="h5">
-                Live From Space
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                component="div"
-                sx={{ color: "text.secondary" }}
-              >
-                Mac Miller
-              </Typography>
-            </CardContent>
-            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-              <IconButton aria-label="previous">
-                {theme.direction === "rtl" ? (
-                  <SkipNextIcon />
-                ) : (
-                  <SkipPreviousIcon />
-                )}
-              </IconButton>
-              <IconButton aria-label="play/pause">
-                <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-              </IconButton>
-              <IconButton aria-label="next">
-                {theme.direction === "rtl" ? (
-                  <SkipPreviousIcon />
-                ) : (
-                  <SkipNextIcon />
-                )}
-              </IconButton>
-            </Box>
+            <Typography component="div" variant="h5">
+              Sem recomendação
+            </Typography>
           </Box>
-          <CardMedia
-            component="img"
-            sx={{ width: 151 }}
-            image={placeholder}
-            alt="Live from space album cover"
-          />
         </>
       )}
     </Card>

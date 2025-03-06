@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography, Card, CardMedia, CardContent } from "@mui/material";
 import { trackDetails } from "../../utils/trackRequests";
 import placeholder from "../../assets/track-placeholder.png";
+import IconButton from "@mui/material/IconButton";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 
 function DailyTrack() {
   const [track, setTrack] = useState(null);
@@ -108,6 +112,17 @@ function DailyTrack() {
                   {"Artista Desconhecido"}
                 </Typography>
               </CardContent>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+              <IconButton aria-label="previous">
+                <SkipPreviousIcon />
+              </IconButton>
+              <IconButton aria-label="play/pause">
+                <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+              </IconButton>
+              <IconButton aria-label="next">
+                <SkipNextIcon />
+              </IconButton>
             </Box>
           </>
         )}
