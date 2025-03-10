@@ -11,3 +11,13 @@ export const trackDetails = async () => {
     throw new Error(error.response.data.error);
   }
 };
+
+export const trackSearch = async (keyword) => {
+  try {
+    const response = await axios.get(`${url}/track/search`, {params: {keyword: keyword, limit: 50, offset: 0}, });
+    return response.data;
+  } catch (error) {
+    console.log(error)
+    throw new Error(error.response.data.error);
+  }
+}
