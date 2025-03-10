@@ -2,7 +2,7 @@
   "name": "jam-club-web",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://jam-club.xyz",
+  "homepage": "https://hugobar.github.io/jam-club-web/",
   "type": "module",
   "scripts": {
     "dev": "vite",
