@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './components/Home';
 import MusicRoom from './components/MusicRoom';
 import Login from './components/auth/Login';
@@ -25,6 +25,7 @@ function App() {
             <Route element={<AppFrame />}>
               <Route path="/" element={<Home />} />
               <Route path="/:groupName" element={<MusicRoom />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Route>
         </Routes>
