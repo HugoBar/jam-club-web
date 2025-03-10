@@ -138,6 +138,7 @@ function SignUp(props) {
                 error={usernameError}
                 helperText={usernameErrorMessage}
                 color={usernameError ? "error" : "primary"}
+                inputProps={{ maxLength: 15 }}
               />
             </FormControl>
             <FormControl>
@@ -166,6 +167,7 @@ function SignUp(props) {
                 error={nicknameError}
                 helperText={nicknameErrorMessage}
                 color={nicknameError ? "error" : "primary"}
+                inputProps={{ maxLength: 15 }}
               />
             </FormControl>
             <FormControl>
