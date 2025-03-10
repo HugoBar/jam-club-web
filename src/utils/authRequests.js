@@ -14,12 +14,13 @@ export const loginRequest = async (username, password) => {
   }
 };
 
-export const registerRequest = async (username, nickname, password) => {
+export const registerRequest = async (username, nickname, password, referralCode) => {
   try {
     const response = await axios.post(`${url}/auth/register`, {
       username,
       nickname,
       password,
+      referralCode
     });
 
     return response.data;

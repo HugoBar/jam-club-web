@@ -24,11 +24,14 @@ function SignUp(props) {
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
   const [nicknameError, setNicknameError] = useState(false);
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState("");
+  const [referralCodeError, setReferralCodeError] = useState(false);
+  const [referralCodeErrorMessage, setReferralCodeErrorMessage] = useState("");
 
   const validateInputs = () => {
     const password = document.getElementById("password");
     const username = document.getElementById("username");
     const nickname = document.getElementById("nickname");
+    const referralCode = document.getElementById("referralCode");
 
     let isValid = true;
 
@@ -61,6 +64,15 @@ function SignUp(props) {
       setNicknameErrorMessage("");
     }
 
+    if (!referralCode.value || referralCode.value.length < 1) {
+      setReferralCodeError(true);
+      setReferralCodeErrorMessage("Código de amigo é obrigatório.");
+      isValid = false;
+    } else {
+      setReferralCodeError(false);
+      setReferralCodeErrorMessage("");
+    }
+
     return isValid;
   };
 
@@ -74,9 +86,10 @@ function SignUp(props) {
     const username = data.get("username");
     const nickname = data.get("nickname");
     const password = data.get("password");
+    const referralCode = data.get("referralCode");
 
     try {
-      const result = await registerRequest(username, nickname, password);
+      const result = await registerRequest(username, nickname, password, referralCode);
       navigate("/login", { state: { registrationSuccess: true } }); // Redirect or show success message
     } catch (error) {
       if (error.message.includes("Nickname")) {
@@ -85,6 +98,9 @@ function SignUp(props) {
       } else if (error.message.includes("Username")) {
         setUsernameError(true);
         setUsernameErrorMessage("Utilizador já existe.");
+      } else if (error.message.includes("referral code")) {
+        setReferralCodeError(true);
+        setReferralCodeErrorMessage("Código de amigo inválido.");
       }
       console.error(
         "There was a problem with the signup request:",
@@ -150,6 +166,19 @@ function SignUp(props) {
                 error={nicknameError}
                 helperText={nicknameErrorMessage}
                 color={nicknameError ? "error" : "primary"}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="referralCode">Código de Amigo</FormLabel>
+              <TextField
+                name="referralCode"
+                required
+                fullWidth
+                id="referralCode"
+                placeholder="UWU123"
+                error={referralCodeError}
+                helperText={referralCodeErrorMessage}
+                color={referralCodeError ? "error" : "primary"}
               />
             </FormControl>
             <Button
