@@ -12,5 +12,6 @@ export default defineConfig(({ mode }) => {
       'process.env.BUG_REPORT_LINK': JSON.stringify(env.BUG_REPORT_LINK)
     },
     plugins: [react()],
+    base: '/jam-club-web/',
   }
 })
