@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 import UserInfo from "./UserInfo";
 import { userSelfDetails } from "../../utils/userRequests";
 import LogoBar from "./LogoBar";
+import BugReportButton from "./BugReportButton";
 
 function AppFrame() {
   const [userDetails, setUserDetails] = useState(null);
@@ -29,6 +30,7 @@ function AppFrame() {
       <Outlet />
       <LogoBar />
       {loggedInUser && <UserInfo data={userDetails} />}
+      <BugReportButton />
     </Container>
   );
 }

@@ -14,6 +14,7 @@ import { AuthContainer } from "../shared/AuthContainer";
 import AppTheme from "../../theme/AppTheme";
 import ColorModeSelect from "../../theme/ColorModeSelect";
 import { registerRequest } from "../../utils/authRequests";
+import BugReportButton from "../frame/BugReportButton";
 
 function SignUp(props) {
   const navigate = useNavigate();
@@ -172,6 +173,7 @@ function SignUp(props) {
             </Typography>
           </Box>
         </Card>
+        <BugReportButton />
       </AuthContainer>
     </AppTheme>
   );

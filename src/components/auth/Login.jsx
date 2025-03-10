@@ -15,6 +15,7 @@ import { useAuth } from "./AuthProvider";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import BugReportButton from "../frame/BugReportButton";
 
 function Login() {
   const navigate = useNavigate();
@@ -164,6 +165,7 @@ function Login() {
             Não sabes ler? Eu disse que não funciona.
           </Alert>
         )}
+        <BugReportButton />
       </AuthContainer>
     </AppTheme>
   );
