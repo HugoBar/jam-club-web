@@ -142,7 +142,7 @@ function Login() {
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Typography sx={{ textAlign: "center" }}>
               Ainda não tens conta?{" "}
-              <Link href="/signup" variant="body2" sx={{ alignSelf: "center" }}>
+              <Link href="/#/signup" variant="body2" sx={{ alignSelf: "center" }}>
                 Registo
               </Link>
             </Typography>
