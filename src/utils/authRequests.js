@@ -15,6 +15,7 @@ export const loginRequest = async (username, password) => {
 };
 
 export const registerRequest = async (username, nickname, password, referralCode) => {
+  console.log("registerRequest -> url", url)
   try {
     const response = await axios.post(`${url}/auth/register`, {
       username,
