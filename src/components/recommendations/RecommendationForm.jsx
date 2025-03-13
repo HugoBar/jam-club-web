@@ -84,8 +84,6 @@ function RecommendationForm({ groupId, onNewRecommendation }) {
           <TextField {...params} label="Search Track" variant="outlined" />
         )}
       />
-
-      <Typography>Current Input: {keyword}</Typography>
     </Stack>
   );
 }

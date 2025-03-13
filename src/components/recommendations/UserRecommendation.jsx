@@ -80,11 +80,6 @@ function UserRecommendation({ groupId, onNewRecommendation }) {
             groupId={groupId}
             onNewRecommendation={handleNewRecommendation}
           ></RecommendationForm>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Typography component="div" variant="h5">
-              Sem recomendação
-            </Typography>
-          </Box>
         </>
       )}
     </Card>
