@@ -2,6 +2,7 @@ import axios from 'axios';
 const url = process.env.API_URL;
 
 export const loginRequest = async (username, password) => {
+  console.log("loginRequest -> url", url)
   try {
     const response = await axios.post(`${url}/auth/login`, {
       username,
