@@ -7,10 +7,6 @@ import {
   TableRow,
   TableCell,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -47,7 +43,6 @@ function GroupMembersList({ group, onNewMemberList }) {
           <PersonAddIcon />
         </Button>
       </Box>
-
       <Table>
         <TableBody>
           {group.members.map((member) => (

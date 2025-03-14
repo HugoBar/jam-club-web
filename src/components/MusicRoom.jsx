@@ -39,7 +39,6 @@ function MusicRoom() {
 
   useEffect(() => {
     if (!groupId) return;
-    console.log("groupId", groupId);
     fetchGroup();
     fetchGroupRecommendations();
   }, [groupId]);
@@ -80,10 +79,22 @@ function MusicRoom() {
           <GroupSettings group={group} />
         </Box>
         <Box>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: "bold", textAlign: "left" }}
+          >
+            A minha recomendação
+          </Typography>
           <UserRecommendation
             groupId={groupId}
             onNewRecommendation={fetchGroupRecommendations}
           />
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: "bold", textAlign: "left", marginTop: "20px" }}
+          >
+            Recomendações do grupo
+          </Typography>
           <SimpleSlider items={groupRecommendations} />
         </Box>
       </Box>

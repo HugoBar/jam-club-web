@@ -41,7 +41,6 @@ export const inviteToGroup = async (groupId, username) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
@@ -54,7 +53,6 @@ export const acceptGroupInvite = async (groupId, inviteId) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
@@ -70,7 +68,6 @@ export const rejectGroupInvite = async (groupId, inviteId, status) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error(error.response.data.message);
   }
 };
@@ -83,7 +80,6 @@ export const removeFromGroup = async (groupId, userId) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error(error.response.data.message);
   }
 };

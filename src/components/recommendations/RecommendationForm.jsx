@@ -28,7 +28,6 @@ function RecommendationForm({ groupId, onNewRecommendation }) {
     setLoading(true);
     try {
       const response = await trackSearch(keyword);
-      console.log("Search results:", response);
       setSearchResults(response || []);
     } catch (error) {
       console.error("Error fetching search results:", error);
@@ -83,6 +82,7 @@ function RecommendationForm({ groupId, onNewRecommendation }) {
       renderInput={(params) => (
         <TextField {...params} label="Search Track" variant="outlined" />
       )}
+      sx={{ width: "80%", padding: "15px", marginTop: 4 }}
     />
   );
 }

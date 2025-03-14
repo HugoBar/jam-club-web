@@ -4,10 +4,8 @@ const url = process.env.API_URL;
 export const trackDetails = async () => {
   try {
     const response = await axios.get(`${url}/track/`);
-    console.log("response.data")
     return response.data;
   } catch (error) {
-    console.log(error)
     throw new Error(error.response.data.error);
   }
 };
@@ -17,7 +15,6 @@ export const trackSearch = async (keyword) => {
     const response = await axios.get(`${url}/track/search`, {params: {keyword: keyword, limit: 50, offset: 0}, });
     return response.data;
   } catch (error) {
-    console.log(error)
     throw new Error(error.response.data.error);
   }
 }

@@ -7,7 +7,6 @@ export const userSelfDetails = async (userId) => {
     
     return response.data;
   } catch (error) {
-    console.log(error)
     throw new Error(error.response.data.error);
   }
 };
@@ -20,7 +19,6 @@ export const userInvitesReceived = async (userId, filter = {}) => {
 
     return result;
   } catch (error) {
-    console.log(error)
     throw new Error(error.response.data.error);
   }
 };
