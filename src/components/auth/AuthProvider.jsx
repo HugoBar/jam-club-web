@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 let responseInterceptor;
+let requestInterceptor;
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('loggedInUser');
 
     axios.interceptors.response.eject(responseInterceptor);
+    axios.interceptors.response.eject(requestInterceptor);
 
     navigate('/login');
   };
@@ -39,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
     console.log("interceptor", accessToken)
-    axios.interceptors.request.use(
+    requestInterceptor = axios.interceptors.request.use(
       config => {
         config.withCredentials = true;
         config.headers['Content-Type'] = 'application/json';
