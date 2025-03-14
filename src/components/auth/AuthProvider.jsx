@@ -77,6 +77,14 @@ export const AuthProvider = ({ children }) => {
     );
   }, [logout]);
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+  
+    if (accessToken) {
+      setAccessToken(accessToken);
+    }
+  }, []);
+
   return (
     <AuthContext.Provider value={{ loggedInUser, accessToken, login, logout }}>
       {children}
