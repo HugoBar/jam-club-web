@@ -12,6 +12,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { getGroupRecommendationByUser } from "../../utils/recommendationRequests";
 import placeholder from "../../assets/track-placeholder.png";
 import RecommendationForm from "./RecommendationForm";
+import OpenTrackButton from "../shared/openTrackButton";
 
 function UserRecommendation({ groupId, onNewRecommendation }) {
   const theme = useTheme();
@@ -73,6 +74,7 @@ function UserRecommendation({ groupId, onNewRecommendation }) {
             image={recommendation.cover[0].url}
             alt="Live from space album cover"
           />
+          <OpenTrackButton url={recommendation.externalUrls.spotify.uri}/>
         </>
       ) : (
         <>

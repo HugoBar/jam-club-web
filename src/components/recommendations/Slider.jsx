@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-cards"; // Import effect-cards CSS
 import { Navigation, EffectCards } from "swiper/modules";
+import OpenTrackButton from "../shared/openTrackButton";
 
 function SimpleSlider({ items }) {
   return (
@@ -23,7 +24,7 @@ function SimpleSlider({ items }) {
         effect="cards"
         slideShadows={false}
       >
-        {items ? (
+        {items && items.length > 0 ? (
           items.map((item, index) => (
             <SwiperSlide key={index}>
               <Box
@@ -37,6 +38,7 @@ function SimpleSlider({ items }) {
                   sx={{
                     width: 300,
                     height: 400,
+                    position: "relative",
                   }}
                 >
                   <CardMedia
@@ -46,10 +48,22 @@ function SimpleSlider({ items }) {
                     image={item.cover[0].url}
                     title={item.name}
                   />
+
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.name}
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography gutterBottom variant="h5" component="div">
+                        {item.name}
+                      </Typography>
+
+                      <OpenTrackButton url={item.externalUrls.spotify.uri} />
+                    </Box>
+
                     <Typography variant="body2" color="text.secondary">
                       {item.artists.join(", ")}
                     </Typography>
@@ -62,7 +76,32 @@ function SimpleSlider({ items }) {
             </SwiperSlide>
           ))
         ) : (
-          <p>PLACEHOLDER</p>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              padding: 2,
+            }}
+          >
+            <Card
+              sx={{
+                width: 300,
+                height: 400,
+              }}
+            >
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  AINDA NÃO HÁ RECOMENDAÇÕES
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  PODES SER O PRIMEIRO!
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  FORÇA!
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
         )}
       </Swiper>
     </Box>

@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
+import OpenTrackButton from "../shared/openTrackButton";
 
 function DailyTrack() {
   const [track, setTrack] = useState(null);
@@ -83,6 +84,7 @@ function DailyTrack() {
                 </Typography>
               </CardContent>
             </Box>
+            <OpenTrackButton url={track.externalUrls.spotify.uri}/>
           </>
         ) : (
           <>
