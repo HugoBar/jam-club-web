@@ -43,6 +43,8 @@ export const AuthProvider = ({ children }) => {
         config.withCredentials = true;
         config.headers['Content-Type'] = 'application/json';
         if (!config.headers['Authorization']) {
+          console.log('Adding access token to request');
+          console.log(accessToken)
           config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
