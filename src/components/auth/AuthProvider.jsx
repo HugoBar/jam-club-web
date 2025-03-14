@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
       config => {
         config.withCredentials = true;
         config.headers['Content-Type'] = 'application/json';
+        console.log("Authorization", config.headers['Authorization'])
         if (!config.headers['Authorization']) {
           console.log('Adding access token to request');
           console.log(accessToken)
