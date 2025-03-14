@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
+    console.log("interceptor", accessToken)
     axios.interceptors.request.use(
       config => {
         config.withCredentials = true;
@@ -79,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
-  
+    console.log("accessToken", accessToken)
     if (accessToken) {
       setAccessToken(accessToken);
     }
