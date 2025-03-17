@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
+    console.log("useEffect", accessToken)
     if (requestInterceptor) {
       console.log("if requestInterceptor", requestInterceptor)
       axios.interceptors.request.eject(requestInterceptor);
