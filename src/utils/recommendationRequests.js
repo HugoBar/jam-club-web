@@ -1,5 +1,7 @@
 import axios from "axios";
+
 const url = process.env.API_URL;
+const token = localStorage.getItem("accessToken");
 
 export const createUserRecommendation = async (groupId, spotifyId) => {
   try {
@@ -7,6 +9,10 @@ export const createUserRecommendation = async (groupId, spotifyId) => {
       `${url}/group/${groupId}/recommendation`,
       {
         spotifyId,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
     );
 
@@ -18,7 +24,12 @@ export const createUserRecommendation = async (groupId, spotifyId) => {
 
 export const getGroupRecommendations = async (groupId) => {
   try {
-    const response = await axios.get(`${url}/group/${groupId}/recommendation`);
+    const response = await axios.get(`${url}/group/${groupId}/recommendation`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error) {
@@ -29,7 +40,13 @@ export const getGroupRecommendations = async (groupId) => {
 export const getGroupRecommendationByUser = async (groupId) => {
   try {
     const response = await axios.get(
-      `${url}/group/${groupId}/recommendation/by_user`
+      `${url}/group/${groupId}/recommendation/by_user`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     return response.data;

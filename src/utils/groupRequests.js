@@ -1,10 +1,16 @@
 import axios from "axios";
+
 const url = process.env.API_URL;
+const token = localStorage.getItem("accessToken");
 
 export const createGroup = async (name) => {
   try {
     const response = await axios.post(`${url}/group/`, {
       name,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     });
 
     return response.data;
@@ -15,7 +21,6 @@ export const createGroup = async (name) => {
 
 export const getUserGroups = async () => {
   try {
-    const token = localStorage.getItem("accessToken");
     const response = await axios.get(`${url}/group/`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -31,7 +36,12 @@ export const getUserGroups = async () => {
 
 export const getGroupById = async (groupId) => {
   try {
-    const response = await axios.get(`${url}/group/${groupId}`);
+    const response = await axios.get(`${url}/group/${groupId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error) {
@@ -43,6 +53,10 @@ export const inviteToGroup = async (groupId, username) => {
   try {
     const response = await axios.post(`${url}/group/${groupId}/invite`, {
       username,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     });
 
     return response.data;
@@ -54,7 +68,13 @@ export const inviteToGroup = async (groupId, username) => {
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
     const response = await axios.post(
-      `${url}/group/${groupId}/invite/${inviteId}/accept`
+      `${url}/group/${groupId}/invite/${inviteId}/accept`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     return response.data;
@@ -69,6 +89,10 @@ export const rejectGroupInvite = async (groupId, inviteId, status) => {
       `${url}/group/${groupId}/invite/${inviteId}/reject`,
       {
         status,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
     );
 
@@ -82,6 +106,10 @@ export const removeFromGroup = async (groupId, userId) => {
   try {
     const response = await axios.post(`${url}/group/${groupId}/remove`, {
       userId,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     });
 
     return response.data;
