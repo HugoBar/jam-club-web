@@ -33,14 +33,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('loggedInUser');
 
     axios.interceptors.response.eject(responseInterceptor);
-    axios.interceptors.response.eject(requestInterceptor);
 
     navigate('/login');
   };
 
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
-    console.log("interceptor", accessToken)
+    if (requestInterceptor) {
+      console.log("if requestInterceptor", requestInterceptor)
+      axios.interceptors.request.eject(requestInterceptor);
+    }
+  
     requestInterceptor = axios.interceptors.request.use(
       config => {
         config.withCredentials = true;
@@ -52,8 +55,13 @@ export const AuthProvider = ({ children }) => {
           config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
-      }, (error) => Promise.reject(error)
+      },
+      error => Promise.reject(error)
     );
+  
+    return () => {
+      axios.interceptors.request.eject(requestInterceptor);
+    };
   }, [accessToken]);
 
   // Add Axios response interceptor to handle token refresh
