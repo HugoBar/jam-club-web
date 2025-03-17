@@ -15,7 +15,13 @@ export const createGroup = async (name) => {
 
 export const getUserGroups = async () => {
   try {
-    const response = await axios.get(`${url}/group/`);
+    const token = localStorage.getItem("accessToken");
+    const response = await axios.get(`${url}/group/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error) {
