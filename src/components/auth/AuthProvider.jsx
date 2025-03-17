@@ -39,6 +39,8 @@ export const AuthProvider = ({ children }) => {
 
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
+    console.log("Current interceptors before:", axios.interceptors.request.handlers);
+
     console.log("useEffect", accessToken)
     if (requestInterceptor) {
       console.log("if requestInterceptor", requestInterceptor)
@@ -59,7 +61,8 @@ export const AuthProvider = ({ children }) => {
       },
       error => Promise.reject(error)
     );
-  
+    console.log("Current interceptors after:", axios.interceptors.request.handlers);
+
     return () => {
       axios.interceptors.request.eject(requestInterceptor);
     };
