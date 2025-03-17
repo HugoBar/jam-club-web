@@ -15,6 +15,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(localStorage.getItem('loggedInUser'));
   const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
+  const [requestInterceptor, setRequestInterceptor] = useState(null);
   const navigate = useNavigate();
 
   const login = (userId, accessToken) => {
@@ -53,6 +54,8 @@ export const AuthProvider = ({ children }) => {
         return config;
       }, (error) => Promise.reject(error)
     );
+
+    setRequestInterceptor(requestInterceptor);
 
     return () => {
       axios.interceptors.request.eject(requestInterceptor);
