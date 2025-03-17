@@ -39,14 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
-    console.log("Current interceptors before:", axios.interceptors.request.handlers);
-
-    console.log("useEffect", accessToken)
-    if (requestInterceptor) {
-      console.log("if requestInterceptor", requestInterceptor)
-      axios.interceptors.request.eject(requestInterceptor);
-    }
-  
+    console.log("interceptor", accessToken)
     requestInterceptor = axios.interceptors.request.use(
       config => {
         config.withCredentials = true;
@@ -58,10 +51,8 @@ export const AuthProvider = ({ children }) => {
           config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         return config;
-      },
-      error => Promise.reject(error)
+      }, (error) => Promise.reject(error)
     );
-    console.log("Current interceptors after:", axios.interceptors.request.handlers);
 
     return () => {
       axios.interceptors.request.eject(requestInterceptor);
