@@ -1,6 +1,6 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -11,55 +11,59 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-
 export const AuthProvider = ({ children }) => {
-  const [loggedInUser, setLoggedInUser] = useState(localStorage.getItem('loggedInUser'));
-  const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
+  const [loggedInUser, setLoggedInUser] = useState(
+    localStorage.getItem("loggedInUser")
+  );
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
   const navigate = useNavigate();
 
   const login = (userId, accessToken) => {
     setLoggedInUser(userId);
     setAccessToken(accessToken);
 
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('loggedInUser', userId);
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("loggedInUser", userId);
   };
 
   const logout = () => {
     setLoggedInUser(null);
     setAccessToken(null);
 
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("loggedInUser");
 
     axios.interceptors.response.eject(responseInterceptor);
 
-    navigate('/login');
+    navigate("/login");
   };
 
   // Add Axios request interceptor to include the access token in all requests
   useEffect(() => {
-    console.log("useEffect", accessToken)
+    console.log("useEffect", accessToken);
     if (requestInterceptor) {
-      console.log("if requestInterceptor", requestInterceptor)
+      console.log("if requestInterceptor", requestInterceptor);
       axios.interceptors.request.eject(requestInterceptor);
     }
-  
+
     requestInterceptor = axios.interceptors.request.use(
-      config => {
+      (config) => {
+        console.log("Axios request intercepted:", config);
         config.withCredentials = true;
-        config.headers['Content-Type'] = 'application/json';
-        console.log("Authorization", config.headers['Authorization'])
-        if (!config.headers['Authorization']) {
-          console.log('Adding access token to request');
-          console.log(accessToken)
-          config.headers['Authorization'] = `Bearer ${accessToken}`;
+        config.headers["Content-Type"] = "application/json";
+        console.log("Authorization", config.headers["Authorization"]);
+        if (!config.headers["Authorization"]) {
+          console.log("Adding access token to request");
+          console.log(accessToken);
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
         return config;
       },
-      error => Promise.reject(error)
+      (error) => Promise.reject(error)
     );
-  
+
     return () => {
       axios.interceptors.request.eject(requestInterceptor);
     };
@@ -70,18 +74,22 @@ export const AuthProvider = ({ children }) => {
     responseInterceptor = axios.interceptors.response.use(
       (response) => {
         // Check if the response contains a new access token
-        if (response.headers['new-access-token']) {
-          setAccessToken(response.headers['new-access-token']);
-          localStorage.setItem('accessToken', response.headers['new-access-token']);
+        if (response.headers["new-access-token"]) {
+          setAccessToken(response.headers["new-access-token"]);
+          localStorage.setItem(
+            "accessToken",
+            response.headers["new-access-token"]
+          );
         }
         return response;
       },
       (error) => {
         // Handle errors
-        if (error.response && (
-          error.response.data.error === 'Invalid refresh token' || 
-          error.response.data.error === 'Refresh token not provided'
-        )) {
+        if (
+          error.response &&
+          (error.response.data.error === "Invalid refresh token" ||
+            error.response.data.error === "Refresh token not provided")
+        ) {
           logout();
         }
         return Promise.reject(error);
@@ -89,13 +97,38 @@ export const AuthProvider = ({ children }) => {
     );
   }, [logout]);
 
+  const attachInterceptors = () => {
+    console.log("Attaching interceptors...");
+
+    if (requestInterceptor) {
+      axios.interceptors.request.eject(requestInterceptor);
+    }
+
+    requestInterceptor = axios.interceptors.request.use(
+      (config) => {
+        console.log("Axios request intercepted:", config);
+        config.withCredentials = true;
+        config.headers["Content-Type"] = "application/json";
+        console.log("Authorization", config.headers["Authorization"]);
+        if (!config.headers["Authorization"]) {
+          console.log("Adding access token to request");
+          console.log(accessToken);
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+  };
+
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    console.log("accessToken", accessToken)
+    const accessToken = localStorage.getItem("accessToken");
+    console.log("accessToken", accessToken);
     if (accessToken) {
       setAccessToken(accessToken);
+      attachInterceptors();
     }
-  }, []);
+  }, [accessToken]);
 
   return (
     <AuthContext.Provider value={{ loggedInUser, accessToken, login, logout }}>
