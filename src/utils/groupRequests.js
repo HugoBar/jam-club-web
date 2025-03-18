@@ -5,8 +5,6 @@ const token = localStorage.getItem("accessToken");
 
 export const createGroup = async (name) => {
   try {
-    console.log("entrou no groups", token)
-
     const response = await axios.post(`${url}/group/`, {
       name,
       headers: {
@@ -23,6 +21,8 @@ export const createGroup = async (name) => {
 
 export const getUserGroups = async () => {
   try {
+    console.log("entrou no groups", token)
+
     const response = await axios.get(`${url}/group/`, {
       headers: {
         Authorization: `Bearer ${token}`,
