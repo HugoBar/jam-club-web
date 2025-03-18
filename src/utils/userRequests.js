@@ -5,6 +5,7 @@ const token = localStorage.getItem("accessToken");
 
 export const userSelfDetails = async (userId) => {
   try {
+    console.log("entrou no userSelfDetails", token)
     const response = await axios.get(`${url}/users/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
