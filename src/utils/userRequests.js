@@ -14,6 +14,7 @@ export const userSelfDetails = async (userId) => {
 
     return response.data;
   } catch (error) {
+    console.log("isto deu erro")
     throw new Error(error.response.data.error);
   }
 };

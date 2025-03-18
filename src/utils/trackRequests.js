@@ -5,6 +5,8 @@ const token = localStorage.getItem("accessToken");
 
 export const trackDetails = async () => {
   try {
+    console.log("entrou no trackdaily", token)
+
     const response = await axios.get(`${url}/track/`, {
       headers: {
         Authorization: `Bearer ${token}`,
