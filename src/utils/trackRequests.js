@@ -1,12 +1,10 @@
 import axios from "axios";
 
 const url = process.env.API_URL;
-const token = localStorage.getItem("accessToken");
 
 export const trackDetails = async () => {
   try {
-    console.log("entrou no trackdaily", token)
-
+    const token = localStorage.getItem("accessToken");
     const response = await axios.get(`${url}/track/`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -21,6 +19,7 @@ export const trackDetails = async () => {
 
 export const trackSearch = async (keyword) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.get(`${url}/track/search`, {
       params: { keyword: keyword, limit: 50, offset: 0 },
       headers: {

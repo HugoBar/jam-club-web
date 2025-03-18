@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const url = process.env.API_URL;
-const token = localStorage.getItem("accessToken");
 
 export const createUserRecommendation = async (groupId, spotifyId) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.post(
       `${url}/group/${groupId}/recommendation`,
       {
@@ -24,6 +24,7 @@ export const createUserRecommendation = async (groupId, spotifyId) => {
 
 export const getGroupRecommendations = async (groupId) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.get(`${url}/group/${groupId}/recommendation`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,6 +40,7 @@ export const getGroupRecommendations = async (groupId) => {
 
 export const getGroupRecommendationByUser = async (groupId) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.get(
       `${url}/group/${groupId}/recommendation/by_user`,
       {

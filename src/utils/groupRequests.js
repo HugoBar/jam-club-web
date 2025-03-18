@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const url = process.env.API_URL;
-const token = localStorage.getItem("accessToken");
 
 export const createGroup = async (name) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.post(`${url}/group/`, {
       name,
       headers: {
@@ -21,8 +21,7 @@ export const createGroup = async (name) => {
 
 export const getUserGroups = async () => {
   try {
-    console.log("entrou no groups", token)
-
+    const token = localStorage.getItem("accessToken");
     const response = await axios.get(`${url}/group/`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -38,6 +37,7 @@ export const getUserGroups = async () => {
 
 export const getGroupById = async (groupId) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.get(`${url}/group/${groupId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -53,6 +53,7 @@ export const getGroupById = async (groupId) => {
 
 export const inviteToGroup = async (groupId, username) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.post(`${url}/group/${groupId}/invite`, {
       username,
       headers: {
@@ -69,6 +70,7 @@ export const inviteToGroup = async (groupId, username) => {
 
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.post(
       `${url}/group/${groupId}/invite/${inviteId}/accept`,
       {
@@ -87,6 +89,7 @@ export const acceptGroupInvite = async (groupId, inviteId) => {
 
 export const rejectGroupInvite = async (groupId, inviteId, status) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.post(
       `${url}/group/${groupId}/invite/${inviteId}/reject`,
       {
@@ -106,6 +109,7 @@ export const rejectGroupInvite = async (groupId, inviteId, status) => {
 
 export const removeFromGroup = async (groupId, userId) => {
   try {
+    const token = localStorage.getItem("accessToken");
     const response = await axios.post(`${url}/group/${groupId}/remove`, {
       userId,
       headers: {
