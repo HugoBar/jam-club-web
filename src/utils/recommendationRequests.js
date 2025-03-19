@@ -9,6 +9,8 @@ export const createUserRecommendation = async (groupId, spotifyId) => {
       `${url}/group/${groupId}/recommendation`,
       {
         spotifyId,
+      },
+      {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
