@@ -29,7 +29,7 @@ function AppFrame() {
     <Container>
       <Outlet />
       <LogoBar />
-      {loggedInUser && <UserInfo data={userDetails} />}
+      {loggedInUser && <UserInfo data={userDetails || {}} />}
       <BugReportButton />
     </Container>
   );
