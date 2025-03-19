@@ -55,7 +55,7 @@ function UserInfo({ data }) {
           color="white"
           sx={{ marginRight: "0.5rem", fontFamily: "Roboto, sans-serif" }}
         >
-          {data.nickname}
+          {data?.nickname || "Convidado"}
         </Typography>
         {showDetails ? (
           <ExpandLessIcon sx={{ color: "white" }} />
@@ -77,7 +77,7 @@ function UserInfo({ data }) {
               color: "rgb(150, 153, 153)",
             }}
           >
-            @{data.username}
+            @{data?.username || "Desconhecido"}
           </Typography>
           <Button
             variant="contained"
