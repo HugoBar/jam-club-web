@@ -81,9 +81,8 @@ export const inviteToGroup = async (groupId, username) => {
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
     const token = localStorage.getItem("accessToken");
-    console.log(token)
     const response = await axios.post(
-      `${url}/group/${groupId}/invite/${inviteId}/accept`,
+      `${url}/group/${groupId}/invite/${inviteId}/accept`, {},
       {
         headers: {
           Authorization: `Bearer ${token}`,
