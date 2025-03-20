@@ -1,22 +1,10 @@
-import axios from "axios";
-
-const url = process.env.API_URL;
+import AxiosService from "./axios";
 
 export const createGroup = async (name) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.post(
-      `${url}/group/`,
-      {
-        name,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await AxiosService.post(`/group/`, {
+      name,
+    });
 
     return response.data;
   } catch (error) {
@@ -26,13 +14,7 @@ export const createGroup = async (name) => {
 
 export const getUserGroups = async () => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.get(`${url}/group/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await AxiosService.get(`/group/`);
 
     return response.data;
   } catch (error) {
@@ -42,13 +24,7 @@ export const getUserGroups = async () => {
 
 export const getGroupById = async (groupId) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.get(`${url}/group/${groupId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await AxiosService.get(`/group/${groupId}`);
 
     return response.data;
   } catch (error) {
@@ -58,19 +34,9 @@ export const getGroupById = async (groupId) => {
 
 export const inviteToGroup = async (groupId, username) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.post(
-      `${url}/group/${groupId}/invite`,
-      {
-        username,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await AxiosService.post(`/group/${groupId}/invite`, {
+      username,
+    });
 
     return response.data;
   } catch (error) {
@@ -80,15 +46,8 @@ export const inviteToGroup = async (groupId, username) => {
 
 export const acceptGroupInvite = async (groupId, inviteId) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.post(
-      `${url}/group/${groupId}/invite/${inviteId}/accept`, {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
+    const response = await AxiosService.post(
+      `/group/${groupId}/invite/${inviteId}/accept`
     );
 
     return response.data;
@@ -99,17 +58,10 @@ export const acceptGroupInvite = async (groupId, inviteId) => {
 
 export const rejectGroupInvite = async (groupId, inviteId, status) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.post(
-      `${url}/group/${groupId}/invite/${inviteId}/reject`,
+    const response = await AxiosService.post(
+      `}/group/${groupId}/invite/${inviteId}/reject`,
       {
         status,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
       }
     );
 
@@ -121,19 +73,9 @@ export const rejectGroupInvite = async (groupId, inviteId, status) => {
 
 export const removeFromGroup = async (groupId, userId) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.post(
-      `${url}/group/${groupId}/remove`,
-      {
-        userId,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await AxiosService.post(`}/group/${groupId}/remove`, {
+      userId,
+    });
 
     return response.data;
   } catch (error) {

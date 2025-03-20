@@ -1,16 +1,8 @@
-import axios from "axios";
-
-const url = process.env.API_URL;
+import AxiosService from "./axios";
 
 export const userSelfDetails = async (userId) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.get(`${url}/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await AxiosService.get(`/users/${userId}`);
 
     return response.data;
   } catch (error) {
@@ -20,15 +12,8 @@ export const userSelfDetails = async (userId) => {
 
 export const userInvitesReceived = async (userId, filter = {}) => {
   try {
-    const token = localStorage.getItem("accessToken");
-    const response = await axios.get(
-      `${url}/users/${userId}/invites/recieved`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
+    const response = await AxiosService.get(
+      `/users/${userId}/invites/recieved`
     );
     const result = response.data.filter(
       (invite) => invite.status == filter.status

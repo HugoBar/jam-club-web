@@ -1,9 +1,8 @@
-import axios from 'axios';
-const url = process.env.API_URL;
+import AxiosService from "./axios";
 
 export const loginRequest = async (username, password) => {
   try {
-    const response = await axios.post(`${url}/auth/login`, {
+    const response = await AxiosService.post(`/auth/login`, {
       username,
       password,
     });
@@ -14,17 +13,22 @@ export const loginRequest = async (username, password) => {
   }
 };
 
-export const registerRequest = async (username, nickname, password, referralCode) => {
+export const registerRequest = async (
+  username,
+  nickname,
+  password,
+  referralCode
+) => {
   try {
-    const response = await axios.post(`${url}/auth/register`, {
+    const response = await AxiosService.post(`/auth/register`, {
       username,
       nickname,
       password,
-      referralCode
+      referralCode,
     });
 
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.error);
   }
-}
+};

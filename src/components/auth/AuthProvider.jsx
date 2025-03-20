@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import AxiosService from '../../utils/axios';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -31,35 +31,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('loggedInUser');
 
-    axios.interceptors.response.eject(responseInterceptor);
+    AxiosService.interceptors.response.eject(responseInterceptor);
 
     navigate('/login');
   };
-
-
-  // Add Axios response interceptor to handle token refresh
-  useEffect(() => {
-    responseInterceptor = axios.interceptors.response.use(
-      (response) => {
-        // Check if the response contains a new access token
-        if (response.headers['new-access-token']) {
-          setAccessToken(response.headers['new-access-token']);
-          localStorage.setItem('accessToken', response.headers['new-access-token']);
-        }
-        return response;
-      },
-      (error) => {
-        // Handle errors
-        if (error.response && (
-          error.response.data.error === 'Invalid refresh token' || 
-          error.response.data.error === 'Refresh token not provided'
-        )) {
-          logout();
-        }
-        return Promise.reject(error);
-      }
-    );
-  }, [logout]);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
