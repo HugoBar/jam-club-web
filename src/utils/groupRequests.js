@@ -14,7 +14,7 @@ export const createGroup = async (name) => {
 
 export const getUserGroups = async () => {
   try {
-    const response = await AxiosService.get(`/group/`);
+    const response = await AxiosService.get(`/group/`, { withCredentials: true });
 
     return response.data;
   } catch (error) {
