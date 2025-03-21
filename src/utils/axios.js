@@ -30,7 +30,7 @@ const refreshTokenInterceptor = (error) => {
     console.log("Invalid refresh token");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("loggedInUser");
-    //window.location.href = '/login';
+    window.location.href = '/login';
   }
   return Promise.reject(error);
 };
