@@ -61,7 +61,7 @@ function GroupMembersList({ group, onNewMemberList }) {
                     TÚ
                   </Typography>
                 )}
-                {member._id !== loggedInUser && member._id !== group.owner && (
+                {member._id !== loggedInUser && member._id !== group.owner && loggedInUser == group.owner && (
                   <Button
                     onClick={() => handleRemoveFromGroup(member)}
                     color="error"
