@@ -5,7 +5,6 @@ const baseUrl = process.env.API_URL
 // Create Axios instance
 const AxiosService = axios.create({
   baseURL: baseUrl,
-  withCredentials: true,
 });
 
 const setRequestHeaders = (config) => {
@@ -17,6 +16,7 @@ const setRequestHeaders = (config) => {
   }
   // Set the content type
   config.headers['Content-Type'] = 'application/json';
+  config.withCredentials = true;
   return config;
 }
 
