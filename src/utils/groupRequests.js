@@ -59,7 +59,7 @@ export const acceptGroupInvite = async (groupId, inviteId) => {
 export const rejectGroupInvite = async (groupId, inviteId, status) => {
   try {
     const response = await AxiosService.post(
-      `}/group/${groupId}/invite/${inviteId}/reject`,
+      `/group/${groupId}/invite/${inviteId}/reject`,
       {
         status,
       }
@@ -73,7 +73,7 @@ export const rejectGroupInvite = async (groupId, inviteId, status) => {
 
 export const removeFromGroup = async (groupId, userId) => {
   try {
-    const response = await AxiosService.post(`}/group/${groupId}/remove`, {
+    const response = await AxiosService.post(`/group/${groupId}/remove`, {
       userId,
     });
 

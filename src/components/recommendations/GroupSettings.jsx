@@ -29,9 +29,6 @@ function GroupSettings({ group }) {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "popover-menu" : undefined;
-
   const handleLeaveGroup = async () => {
     try {
       await removeFromGroup(group._id, loggedInUser);
@@ -53,8 +50,7 @@ function GroupSettings({ group }) {
       </IconButton>
 
       <Popover
-        id={id}
-        open={open}
+        open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
@@ -67,8 +63,8 @@ function GroupSettings({ group }) {
         }}
       >
         <List>
-          <ListItem button onClick={handleLeaveGroup}>
-            <ListItemText primary={"Sair do grupo"} />
+          <ListItem button onClick={() => setOpenDialog(true)}>
+            <ListItemText primary="Sair do grupo" />
           </ListItem>
         </List>
       </Popover>
