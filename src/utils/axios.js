@@ -27,7 +27,6 @@ const refreshTokenInterceptor = (error) => {
     (error.response.data.error === "Invalid refresh token" ||
       error.response.data.error === "Refresh token not provided")
   ) {
-    console.log("Invalid refresh token");
     localStorage.removeItem("accessToken");
     localStorage.removeItem("loggedInUser");
     window.location.href = '/login';

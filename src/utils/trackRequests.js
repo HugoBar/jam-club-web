@@ -2,7 +2,7 @@ import AxiosService from "./axios";
 
 export const trackDetails = async () => {
   try {
-    const response = await AxiosService.get(`/track/`, { withCredentials: true });
+    const response = await AxiosService.get(`/track/`);
 
     return response.data;
   } catch (error) {
